@@ -1,0 +1,50 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: thirty-six-questions
+  description: "Query 36 questions to develop intimacy API."
+host: api-src.36questions.app
+schemes:
+  - "https"
+paths:
+  "/questions":
+    get:
+      description: "Get all questions."
+      operationId: "getAllQuestions"
+      responses:
+        200:
+          description: "Success."
+          schema:
+            type: array
+            items: 
+              type: object
+        404:
+          description: "The questions could not be found."
+  "/questions/{id}":
+    get:
+      description: "Get one question by question number."
+      operationId: "getQuestionById"
+      parameters:
+        - name: id
+          type: integer
+          in: path
+          description: Question ID
+          required: true
+      responses:
+        200:
+          description: "Success."
+          schema:
+            $ref: '#/definitions/Question'
+        404:
+          description: "The question could not be found."
+
+definitions:
+  Question:
+    type: object
+    properties: 
+      number: 
+        type: integer
+        description: Question number
+      question: 
+        type: string
+        description: Question text
